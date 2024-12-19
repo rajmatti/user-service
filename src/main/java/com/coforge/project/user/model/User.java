@@ -2,10 +2,12 @@ package com.coforge.project.user.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Entity
 @Table(name = "users")
 public class User {
+	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -85,4 +87,26 @@ public class User {
     public void setWalletBalance(Double walletBalance) {
         this.walletBalance = walletBalance;
     }
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(dateOfBirth, email, id, password, phoneNumber, username, walletBalance);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		return Objects.equals(dateOfBirth, other.dateOfBirth) && Objects.equals(email, other.email)
+				&& Objects.equals(id, other.id) && Objects.equals(password, other.password)
+				&& Objects.equals(phoneNumber, other.phoneNumber) && Objects.equals(username, other.username)
+				&& Objects.equals(walletBalance, other.walletBalance);
+	}
+    
+    
 }

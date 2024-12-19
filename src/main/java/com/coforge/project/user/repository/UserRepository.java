@@ -8,6 +8,7 @@ import com.coforge.project.user.model.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
+	
     User findByUsername(String username);
     
     @Query("SELECT u.walletBalance FROM User u WHERE u.id = :userId")
